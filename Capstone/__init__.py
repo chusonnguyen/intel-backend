@@ -6,6 +6,8 @@ from flask_marshmallow import Marshmallow
 from flask_cors import CORS, cross_origin
 from flask_sqlalchemy import SQLAlchemy
 from sqlalchemy import create_engine
+import sqlalchemy
+import pandas as pd
 UPLOAD_FOLDER = 'Capstone/upload_file'
 
 
@@ -16,8 +18,10 @@ def create_app():
     global ma
     global db
     ma=Marshmallow(app)
+    mysql_engine = sqlalchemy.create_engine("mysql://admin:password123@flask1.ck2xdeldx037.us-west-2.rds.amazonaws.com:3306")
+    pd.read_sql_query("create database dbname", con=mysql_engine)
     #engine=create_engine('mysql://admin:password123''@flask2.cluster-ck2xdeldx037.us-west-2.rds.amazonaws.com/flask2')
-    app.config['SQLALCHEMY_DATABASE_URI'] = 'mysql://admin:password123''@flask1.ck2xdeldx037.us-west-2.rds.amazonaws.com'
+    app.config['SQLALCHEMY_DATABASE_URI'] = "mysql://admin:password123@flask1.ck2xdeldx037.us-west-2.rds.amazonaws.com:3306"
     app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
     db=SQLAlchemy(app)
     #Secret key for privacy DON'T SHARE!
