@@ -20,6 +20,8 @@ def create_app():
 
     db=SQLAlchemy(application)
     #Secret key for privacy DON'T SHARE!
+    application.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
+    application.config['SQLALCHEMY_DATABASE_URI'] = 'mysql://admin:password123''@flask2.cluster-ck2xdeldx037.us-west-2.rds.amazonaws.com/flask2'
     application.config['CORS_HEADER'] = 'Content-Type'
     application.config['SECRET_KEY'] = '14320edb76fb8c6018c28b07'
     application.config['MYSQL_HOST'] = 'flask2.cluster-ck2xdeldx037.us-west-2.rds.amazonaws.com'
