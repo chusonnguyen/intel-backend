@@ -17,16 +17,16 @@ def create_app():
     global db
     ma=Marshmallow(app)
     #engine=create_engine('mysql://admin:password123''@flask2.cluster-ck2xdeldx037.us-west-2.rds.amazonaws.com/flask2')
-    app.config['SQLALCHEMY_DATABASE_URI'] = 'mysql://admin:password123''@flask2.cluster-ck2xdeldx037.us-west-2.rds.amazonaws.com/flask2'
+    app.config['SQLALCHEMY_DATABASE_URI'] = 'mysql://admin:password123''@flask1.ck2xdeldx037.us-west-2.rds.amazonaws.com'
     app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
     db=SQLAlchemy(app)
     #Secret key for privacy DON'T SHARE!
     app.config['CORS_HEADER'] = 'Content-Type'
     app.config['SECRET_KEY'] = '14320edb76fb8c6018c28b07'
-    app.config['MYSQL_HOST'] = 'flask2.cluster-ck2xdeldx037.us-west-2.rds.amazonaws.com'
+    app.config['MYSQL_HOST'] = 'flask1.ck2xdeldx037.us-west-2.rds.amazonaws.com'
     app.config['MYSQL_USER'] = 'admin'
     app.config['MYSQL_PASSWORD'] = 'password123'
-    app.config['MYSQL_DB'] = 'flask2'
+    app.config['MYSQL_DB'] = 'flask1'
     app.config['UPLOAD_FOLDER'] = UPLOAD_FOLDER
     app.config['MAX_CONTENT_LENGTH'] = 16 * 1024 * 1024
     global mysql
