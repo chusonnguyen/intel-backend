@@ -10,15 +10,15 @@ UPLOAD_FOLDER = 'Capstone/upload_file'
 
 
 def create_app():
-    app= Flask(__name__)
-    app.secret_key='14320edb76fb8c6018c28b07'
+    app = Flask(__name__)
+    app.secret_key ='14320edb76fb8c6018c28b07'
     cors = CORS(app)
     global ma
     global db
     ma=Marshmallow(app)
     #engine=create_engine('mysql://admin:password123''@flask2.cluster-ck2xdeldx037.us-west-2.rds.amazonaws.com/flask2')
-    app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
     app.config['SQLALCHEMY_DATABASE_URI'] = 'mysql://admin:password123''@flask2.cluster-ck2xdeldx037.us-west-2.rds.amazonaws.com/flask2'
+    app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
     db=SQLAlchemy(app)
     #Secret key for privacy DON'T SHARE!
     app.config['CORS_HEADER'] = 'Content-Type'
