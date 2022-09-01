@@ -10,29 +10,29 @@ UPLOAD_FOLDER = 'Capstone/upload_file'
 
 
 def create_app():
-    application =app= Flask(__name__)
-    application.secret_key='14320edb76fb8c6018c28b07'
-    cors = CORS(application)
+    app= Flask(__name__)
+    app.secret_key='14320edb76fb8c6018c28b07'
+    cors = CORS(app)
     global ma
     global db
-    ma=Marshmallow(application)
+    ma=Marshmallow(app)
     #engine=create_engine('mysql://admin:password123''@flask2.cluster-ck2xdeldx037.us-west-2.rds.amazonaws.com/flask2')
 
-    db=SQLAlchemy(application)
+    db=SQLAlchemy(app)
     #Secret key for privacy DON'T SHARE!
-    application.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
-    application.config['SQLALCHEMY_DATABASE_URI'] = 'mysql://admin:password123''@flask2.cluster-ck2xdeldx037.us-west-2.rds.amazonaws.com/flask2'
-    application.config['CORS_HEADER'] = 'Content-Type'
-    application.config['SECRET_KEY'] = '14320edb76fb8c6018c28b07'
-    application.config['MYSQL_HOST'] = 'flask2.cluster-ck2xdeldx037.us-west-2.rds.amazonaws.com'
-    application.config['MYSQL_USER'] = 'admin'
-    application.config['MYSQL_PASSWORD'] = 'password123'
-    application.config['MYSQL_DB'] = 'flask2'
-    application.config['UPLOAD_FOLDER'] = UPLOAD_FOLDER
-    application.config['MAX_CONTENT_LENGTH'] = 16 * 1024 * 1024
+    app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
+    app.config['SQLALCHEMY_DATABASE_URI'] = 'mysql://admin:password123''@flask2.cluster-ck2xdeldx037.us-west-2.rds.amazonaws.com/flask2'
+    app.config['CORS_HEADER'] = 'Content-Type'
+    app.config['SECRET_KEY'] = '14320edb76fb8c6018c28b07'
+    app.config['MYSQL_HOST'] = 'flask2.cluster-ck2xdeldx037.us-west-2.rds.amazonaws.com'
+    app.config['MYSQL_USER'] = 'admin'
+    app.config['MYSQL_PASSWORD'] = 'password123'
+    app.config['MYSQL_DB'] = 'flask2'
+    app.config['UPLOAD_FOLDER'] = UPLOAD_FOLDER
+    app.config['MAX_CONTENT_LENGTH'] = 16 * 1024 * 1024
     global mysql
-    mysql = MySQL(application)
-    Bootstrap(application)
+    mysql = MySQL(app)
+    Bootstrap(app)
 
     from .views import views
     from .auth import auth
@@ -51,21 +51,21 @@ def create_app():
     from .ailse import ailse
     from .chart import chart
     
-    application.register_blueprint(views,url_prefix='/')
-    application.register_blueprint(auth,url_prefix='/')
-    application.register_blueprint(project,url_prefix='/')
-    application.register_blueprint(existedzone,url_prefix='/')
-    application.register_blueprint(refreshedzone,url_prefix='/')
-    application.register_blueprint(dashboard,url_prefix='/dashboard/')
-    application.register_blueprint(layout,url_prefix='/layout/')
-    application.register_blueprint(pole,url_prefix='/pole/')
-    application.register_blueprint(ailse, url_prefix='/ailse/')
-    application.register_blueprint(playground, url_prefix='/playground/')
-    application.register_blueprint(projecthistory,url_prefix='/project/history/')
-    application.register_blueprint(chart, url_prefix='/chart/')
-    application.register_blueprint(history, url_prefix='/history/')
-    application.register_blueprint(zonehistory,url_prefix='/zone/history/')
-    application.register_blueprint(crates,url_prefix='/')
-    application.register_blueprint(zonestatistics,url_prefix='/stats/')
+    app.register_blueprint(views,url_prefix='/')
+    app.register_blueprint(auth,url_prefix='/')
+    app.register_blueprint(project,url_prefix='/')
+    app.register_blueprint(existedzone,url_prefix='/')
+    app.register_blueprint(refreshedzone,url_prefix='/')
+    app.register_blueprint(dashboard,url_prefix='/dashboard/')
+    app.register_blueprint(layout,url_prefix='/layout/')
+    app.register_blueprint(pole,url_prefix='/pole/')
+    app.register_blueprint(ailse, url_prefix='/ailse/')
+    app.register_blueprint(playground, url_prefix='/playground/')
+    app.register_blueprint(projecthistory,url_prefix='/project/history/')
+    app.register_blueprint(chart, url_prefix='/chart/')
+    app.register_blueprint(history, url_prefix='/history/')
+    app.register_blueprint(zonehistory,url_prefix='/zone/history/')
+    app.register_blueprint(crates,url_prefix='/')
+    app.register_blueprint(zonestatistics,url_prefix='/stats/')
 
-    return application
+    return app
