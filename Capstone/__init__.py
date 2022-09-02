@@ -18,10 +18,10 @@ def create_app():
     global ma
     global db
     ma=Marshmallow(app)
-    mysql_engine = sqlalchemy.create_engine("mysql://admin:password123@flask1.ck2xdeldx037.us-west-2.rds.amazonaws.com:3306")
-    pd.read_sql_query("create database dbname", con=mysql_engine)
+    #mysql_engine = sqlalchemy.create_engine("mysql://admin:password123@flask1.ck2xdeldx037.us-west-2.rds.amazonaws.com:3306")
+    #pd.read_sql_query("create database flask1", con=mysql_engine)
     #engine=create_engine('mysql://admin:password123''@flask2.cluster-ck2xdeldx037.us-west-2.rds.amazonaws.com/flask2')
-    app.config['SQLALCHEMY_DATABASE_URI'] = "mysql://admin:password123@flask1.ck2xdeldx037.us-west-2.rds.amazonaws.com:3306"
+    app.config['SQLALCHEMY_DATABASE_URI'] = "mysql://admin:password123@flask1.ck2xdeldx037.us-west-2.rds.amazonaws.com/flask1"
     app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
     db=SQLAlchemy(app)
     #Secret key for privacy DON'T SHARE!
