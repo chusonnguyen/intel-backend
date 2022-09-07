@@ -295,8 +295,8 @@ def algorythmExecute(remainItemList: List, width, length, crate_instances_use, c
   global indicator, cordinateList, numOfCrate
   if (indicator <= wsaaLoop or (wsaaLoop == 0 and indicator == 0)) :
     pack_algo_list = ['skyline','maximal_rectangle','guillotine','shelf']
-    heuristicList = ['bottom_left', 'best_area', 'best_shortside', 'best_longside', 'worst_area', 'worst_shortside', 'worst_longside', 'contact_point']
-    # heuristicList = ['bottom_left']
+    #heuristicList = ['bottom_left', 'best_area', 'best_shortside', 'best_longside', 'worst_area', 'worst_shortside', 'worst_longside', 'contact_point']
+    heuristicList = ['bottom_left']
     listResult = []
     with concurrent.futures.ProcessPoolExecutor() as executor:
         for algo in pack_algo_list:
