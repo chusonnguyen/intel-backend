@@ -26,10 +26,6 @@ def allowed_file(filename):
     return '.' in filename and \
            filename.rsplit('.', 1)[1].lower() in ALLOWED_EXTENSIONS
 
-@views.route('/', methods=['GET'])
-def home():
-    return jsonify('healthcheck')
-    
 @views.route('/upload/<zoneid>', methods=['POST'])
 @cross_origin()
 @token_required
@@ -126,7 +122,7 @@ def upload_file(current_user, token,zoneid):
             saveDB(load_file(get_file()), zoneId,w,l)
         else:
             mainRow(load_file(get_file()), w, l, totalPoll, pollRow, pollW, pollL, pollX, pollY, pollGap,pollRowGap)
-            saveDBRow(load_file(get_file()), zoneId,w,l)
+            saveDB(load_file(get_file()), zoneId,w,l)
         return jsonify({'message' : 'File successfully uploaded'})
     
     return jsonify({'message' : 'Allowed file types is xlsx'})
@@ -187,8 +183,8 @@ def saveDBRow(df: pd.DataFrame, zoneId,w,l):
         if stacked[index] == "Yes":
             labelList = label[index].split("x")
             trackingList = trackingNumber[index].split("x")
-            statistic.append(Statistics(trackingNumber[index], labelList[0].strip(), Xaxis[index], Yaxis[index], rotation[index],stacked[index] ))
-            statistic.append(Statistics(trackingNumber[index], labelList[1].strip(), Xaxis[index], Yaxis[index], rotation[index],stacked[index] ))
+            statistic.append(Statistics(trackingList[0].strip(), labelList[0].strip(), Xaxis[index], Yaxis[index], rotation[index],stacked[index] ))
+            statistic.append(Statistics(trackingList[1].strip(), labelList[1].strip(), Xaxis[index], Yaxis[index], rotation[index],stacked[index] ))
         else:
             statistic.append(Statistics(trackingNumber[index], label[index], Xaxis[index], Yaxis[index], rotation[index],stacked[index] ))
            
