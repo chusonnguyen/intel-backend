@@ -283,23 +283,21 @@ def update_item(current_user, token, zoneid):
 
 #save layout
 #inbound update x y
-@playground.route('savelayout/<zoneid>',methods=['POST'])
+@playground.route('/savelayout/<zoneid>',methods=['PUT'])
 @cross_origin()
 @token_required
 def save_layout(current_user, token, zoneid):
     ratio = 35
     req_data = request.get_json(force=False, silent=False, cache=True)
-    cursorProject= mysql.connection.cursor(MySQLdb.cursors.DictCursor)
-    cursorProject.execute("SELECT project_id FROM `refreshed_zones` WHERE zone_id = %s", [zoneid])
-    project_id=cursorProject.fetchone() 
-    cursorProject.close()
-    projectID = int(project_id.get('project_id'))
-    currentTime = datetime.datetime.utcnow()
-    honeycombRate = req_data('honeycombRate')
-    thisChart = Chart(projectID,zoneid,honeycombRate,currentTime)
-    db.session.add(thisChart)
+    cursor = mysql.connection.cursor(MySQLdb.cursors.DictCursor)
+    for crate in req_data :
+        print(crate)
+        newX = round(crate.get('x') / 35 , 2)
+        newY = round(crate.get('y') / 35 , 2)
+        cursor.execute("UPDATE playground p SET p.x = %s, p.y = %s WHERE p.crate_label= %s AND p.zone_id = %s ;",[newX,newY,crate.get('crate_label'),crate.get('zone_id')])
+        mysql.connection.commit()
     db.session.commit()
-    return jsonify(thisChart)
+    return jsonify()
 
  
     
